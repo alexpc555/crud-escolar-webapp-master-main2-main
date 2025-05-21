@@ -1,0 +1,107 @@
+<div class="wrapper">
+  <div class="header-home">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="body-alumnos">
+    <div class="row mt-5 mb-5">
+      <div class="col-12">
+        <span class="title-perfil">Bienvenido {{name_user}}</span><br><br>
+        <span class="title-perfil">{{rol}}</span>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row mt-3 mb-5 text-center">
+        <div class="col-12">
+          <div class="alert alert-primary" role="alert">
+            <span class="title-table">Lista de eventos registrados</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+  <ng-container matColumnDef="titulo">
+    <th mat-header-cell *matHeaderCellDef> Título </th>
+    <td mat-cell *matCellDef="let element"> {{element.titulo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="tipo_de_evento">
+    <th mat-header-cell *matHeaderCellDef> Tipo </th>
+    <td mat-cell *matCellDef="let element"> {{element.tipo_de_evento}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="fecha_de_realizacion">
+    <th mat-header-cell *matHeaderCellDef> Fecha </th>
+    <td mat-cell *matCellDef="let element"> {{element.fecha_de_realizacion | date:'dd/MM/yyyy'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="hora_inicio">
+    <th mat-header-cell *matHeaderCellDef> Hora inicio </th>
+    <td mat-cell *matCellDef="let element"> {{element.hora_inicio}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="hora_fin">
+    <th mat-header-cell *matHeaderCellDef> Hora fin </th>
+    <td mat-cell *matCellDef="let element"> {{element.hora_fin}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="lugar">
+    <th mat-header-cell *matHeaderCellDef> Lugar </th>
+    <td mat-cell *matCellDef="let element"> {{element.lugar}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="publico_objetivo">
+    <th mat-header-cell *matHeaderCellDef> Público objetivo </th>
+    <td mat-cell *matCellDef="let element"> {{element.publico_objetivo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="programa_educativo">
+    <th mat-header-cell *matHeaderCellDef> Programa educativo </th>
+    <td mat-cell *matCellDef="let element"> {{element.programa_educativo}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="responsable_del_evento">
+    <th mat-header-cell *matHeaderCellDef> Responsable </th>
+    <td mat-cell *matCellDef="let element"> {{element.responsable_del_evento}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="descripcion_breve">
+    <th mat-header-cell *matHeaderCellDef> Descripción </th>
+    <td mat-cell *matCellDef="let element"> {{element.descripcion_breve}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cupo_max">
+    <th mat-header-cell *matHeaderCellDef> Cupo máximo </th>
+    <td mat-cell *matCellDef="let element"> {{element.cupo_max}} </td>
+  </ng-container>
+
+
+<ng-container *ngIf="rol !== 'maestro' && rol !== 'alumno'" matColumnDef="editar">
+  <th mat-header-cell *matHeaderCellDef> Editar </th>
+  <td mat-cell *matCellDef="let element" class="td-editar">
+    <i class="bi bi-pencil-square" (click)="goEditar(element.id)"></i>
+  </td> 
+</ng-container>
+
+
+  <ng-container matColumnDef="eliminar">
+    <th mat-header-cell *matHeaderCellDef> Eliminar </th>
+    <td mat-cell *matCellDef="let element" class="td-eliminar">
+      <i *ngIf="rol !== 'maestro' && rol !== 'alumno'" class="bi bi-trash3-fill" (click)="delete(element.id)"></i>
+    </td>
+  </ng-container>
+
+<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</div>
